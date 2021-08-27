@@ -14,6 +14,7 @@ namespace ProcDigital1
 {
     public partial class Form1 : Form
     {
+        private variablepruebagit;
         //Camara
 
         private bool HayDispositivos;
