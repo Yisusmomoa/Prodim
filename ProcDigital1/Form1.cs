@@ -32,6 +32,9 @@ namespace ProcDigital1
 
         private int AnchoVentana, AltoVentana;
 
+        private int trackR = 0, trackG = 0, trackB = 0;
+
+        private int trackBrillo = 0, trackContraste = 0;
         public Form1()
         {
             InitializeComponent();
@@ -416,9 +419,39 @@ namespace ProcDigital1
 
         private void colorizarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Colorizar frmcolorizar = new Colorizar();
-            frmcolorizar.Show();
-            
+            /* Colorizar frmcolorizar = new Colorizar();
+             frmcolorizar.Show();*/
+            int x = 0, y = 0;
+            double rc = trackR / 255.0; //estos son los valores a editar
+            double gc = trackG / 255.0;
+            double bc = trackB / 255.0;
+
+
+            Color miColor = new Color();
+            int r = 0, b = 0;
+            //creamos la imagen en tonos de gris
+
+            resultante = new Bitmap(original.Width, original.Height);
+            Color rColor = new Color();
+            Color oColor = new Color();
+            float g = 0;
+
+            tonosDeGrisToolStripMenuItem_Click(sender, e);
+
+            for (x = 0; x < original.Width; x++)
+            {
+                for (y = 0; y < original.Height; y++)
+                {
+                    miColor = resultante.GetPixel(x, y);
+                    r = (int)(miColor.R * rc);
+                    g = (int)(miColor.G * gc);
+                    b = (int)(miColor.B * bc);
+                    resultante.SetPixel(x, y, Color.FromArgb(r, (int)g, b));
+
+                }
+            }
+            this.Invalidate();
+
         }
 
         private void colorizarGradienteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -428,6 +461,94 @@ namespace ProcDigital1
             this.Invalidate();
         }
 
+        private void trackBarRed_Scroll(object sender, EventArgs e)
+        {
+            labelValorTrackR.Text = trackBarRed.Value.ToString();
+            trackR = trackBarRed.Value;
+        }
+
+        private void trackBarGreen_Scroll(object sender, EventArgs e)
+        {
+            labelValorTrackG.Text = trackBarGreen.Value.ToString();
+            trackG = trackBarGreen.Value;
+        }
+
+        private void trackBarBlue_Scroll(object sender, EventArgs e)
+        {
+            labelValorTrackB.Text = trackBarBlue.Value.ToString();
+            trackB = trackBarBlue.Value;
+        }
+
+        private void trackBarBrillo_Scroll(object sender, EventArgs e)
+        {
+            labelBrillo.Text = trackBarBrillo.Value.ToString();
+            trackBrillo = trackBarBrillo.Value;
+        }
+
+        private void contrasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //modificamos el contrasete de la imagen
+
+            int contraste = trackContraste; //el valor va desde -100 a 100
+            float c = (100.0f + contraste) / 100;
+            c *= c;
+            int x = 0, y = 0;
+            resultante = new Bitmap(original.Width, original.Height);
+            Color rColor = new Color();
+            Color oColor = new Color();
+            float r = 0, g = 0, b = 0;
+            for ( x = 0; x < original.Width; x++)
+            {
+                for ( y = 0; y < original.Height; y++)
+                {
+                    oColor = original.GetPixel(x, y);
+
+                    //procesamos y obtenemos el nuevo color
+                    r = ((((oColor.R / 255.0f) - 0.5f) * c) + 0.5f) * 255;
+                    if (r > 255) r = 255;
+                    if (r < 0) r = 0;
+
+                    g = ((((oColor.G / 255.0f) - 0.5f) * c) + 0.5f) * 255;
+                    if (g > 255) g = 255;
+                    if (g < 0) g = 0;
+
+                    b = ((((oColor.B / 255.0f) - 0.5f) * c) + 0.5f) * 255;
+                    if (b > 255) b = 255;
+                    if (b < 0) b = 0;
+                    rColor = Color.FromArgb((int)r, (int)g, (int)b);
+                    resultante.SetPixel(x, y, rColor);
+                }
+            }
+            this.Invalidate();
+        }
+
+        private void flipHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int x = 0, y = 0;
+            resultante = new Bitmap(original.Width, original.Height);
+
+            Color rColor = new Color();
+            Color oColor = new Color();
+
+            for ( x = 0; x < original.Width; x++)
+            {
+                for ( y = 0; y < original.Height; y++)
+                {
+                    oColor = original.GetPixel(x, y);
+                    rColor = Color.FromArgb(oColor.R, oColor.G, oColor.B);
+                    resultante.SetPixel(original.Width -x -1,y, rColor);
+                }
+            }
+            this.Invalidate();
+
+        }
+
+        private void trackBarContraste_Scroll(object sender, EventArgs e)
+        {
+            labelContraste.Text = trackBarContraste.Value.ToString();
+            trackContraste = trackBarContraste.Value;
+        }
+
         private void basicosToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -435,10 +556,51 @@ namespace ProcDigital1
 
         private void brilloToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Brillo frmBrillo = new Brillo();
-            frmBrillo.Show();
+            /*Brillo frmBrillo = new Brillo();
+            frmBrillo.Show();*/
 
-            
+            int brillo = trackBrillo;
+            // float pBrillo = 1.2f;
+            int x = 0, y = 0;
+            resultante = new Bitmap(original.Width, original.Height);
+            Color rColor = new Color();
+            Color oColor = new Color();
+            int r = 0, g = 0, b = 0;
+
+            for (x = 0; x < original.Width; x++)
+            {
+                for (y = 0; y < original.Height; y++)
+                {
+                    //obtenemos el color del pixel
+                    oColor = original.GetPixel(x, y);
+
+                    r = oColor.R + brillo;
+                    g = oColor.G + brillo;
+                    b = oColor.B + brillo;
+
+
+                    //r = (int)(oColor.R * pBrillo);
+                    //g = (int)(oColor.G * pBrillo);
+                    //b = (int)(oColor.B * pBrillo);
+
+                    if (r > 255) r = 255;
+                    else if (r < 0) r = 0;
+
+                    if (g > 255) g = 255;
+                    else if (g < 0) g = 0;
+
+                    if (b > 255) b = 255;
+                    else if (b < 0) b = 0;
+                    rColor = Color.FromArgb(r, g, b);
+
+                    resultante.SetPixel(x, y, rColor);
+
+
+                }
+            }
+            this.Invalidate();
+
+
         }
 
         public void CerrarWebCam()

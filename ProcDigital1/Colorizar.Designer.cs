@@ -32,6 +32,8 @@ namespace ProcDigital1
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.abrirImagenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salvarImagenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salarImagenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.trackBarRed = new System.Windows.Forms.TrackBar();
@@ -43,8 +45,6 @@ namespace ProcDigital1
             this.labelValorTrackR = new System.Windows.Forms.Label();
             this.labelValorTrackB = new System.Windows.Forms.Label();
             this.labelValorTrackG = new System.Windows.Forms.Label();
-            this.salvarImagenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salarImagenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarRed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBlue)).BeginInit();
@@ -81,6 +81,19 @@ namespace ProcDigital1
             this.abrirImagenToolStripMenuItem.Text = "Abrir Imagen";
             this.abrirImagenToolStripMenuItem.Click += new System.EventHandler(this.abrirImagenToolStripMenuItem_Click);
             // 
+            // salvarImagenToolStripMenuItem
+            // 
+            this.salvarImagenToolStripMenuItem.Name = "salvarImagenToolStripMenuItem";
+            this.salvarImagenToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.salvarImagenToolStripMenuItem.Text = "Salvar imagen";
+            // 
+            // salarImagenToolStripMenuItem
+            // 
+            this.salarImagenToolStripMenuItem.Name = "salarImagenToolStripMenuItem";
+            this.salarImagenToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
+            this.salarImagenToolStripMenuItem.Text = "Salar imagen";
+            this.salarImagenToolStripMenuItem.Click += new System.EventHandler(this.salarImagenToolStripMenuItem_Click);
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -98,7 +111,7 @@ namespace ProcDigital1
             this.trackBarRed.Name = "trackBarRed";
             this.trackBarRed.Size = new System.Drawing.Size(222, 45);
             this.trackBarRed.TabIndex = 2;
-            this.trackBarRed.Value = 1;
+            this.trackBarRed.Value = 2;
             this.trackBarRed.Scroll += new System.EventHandler(this.trackBarRed_Scroll);
             // 
             // label1
@@ -118,7 +131,7 @@ namespace ProcDigital1
             this.trackBarBlue.Name = "trackBarBlue";
             this.trackBarBlue.Size = new System.Drawing.Size(222, 45);
             this.trackBarBlue.TabIndex = 2;
-            this.trackBarBlue.Value = 1;
+            this.trackBarBlue.Value = 2;
             this.trackBarBlue.Scroll += new System.EventHandler(this.trackBarBlue_Scroll);
             // 
             // label2
@@ -138,7 +151,7 @@ namespace ProcDigital1
             this.trackBarGreen.Name = "trackBarGreen";
             this.trackBarGreen.Size = new System.Drawing.Size(222, 45);
             this.trackBarGreen.TabIndex = 2;
-            this.trackBarGreen.Value = 1;
+            this.trackBarGreen.Value = 2;
             this.trackBarGreen.Scroll += new System.EventHandler(this.trackBarGreen_Scroll);
             // 
             // label3
@@ -176,19 +189,6 @@ namespace ProcDigital1
             this.labelValorTrackG.Size = new System.Drawing.Size(31, 13);
             this.labelValorTrackG.TabIndex = 4;
             this.labelValorTrackG.Text = "Valor";
-            // 
-            // salvarImagenToolStripMenuItem
-            // 
-            this.salvarImagenToolStripMenuItem.Name = "salvarImagenToolStripMenuItem";
-            this.salvarImagenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.salvarImagenToolStripMenuItem.Text = "Salvar imagen";
-            // 
-            // salarImagenToolStripMenuItem
-            // 
-            this.salarImagenToolStripMenuItem.Name = "salarImagenToolStripMenuItem";
-            this.salarImagenToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
-            this.salarImagenToolStripMenuItem.Text = "Salar imagen";
-            this.salarImagenToolStripMenuItem.Click += new System.EventHandler(this.salarImagenToolStripMenuItem_Click);
             // 
             // Colorizar
             // 
