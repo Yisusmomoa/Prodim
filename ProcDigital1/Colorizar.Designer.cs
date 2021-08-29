@@ -43,6 +43,8 @@ namespace ProcDigital1
             this.labelValorTrackR = new System.Windows.Forms.Label();
             this.labelValorTrackB = new System.Windows.Forms.Label();
             this.labelValorTrackG = new System.Windows.Forms.Label();
+            this.salvarImagenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salarImagenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarRed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBlue)).BeginInit();
@@ -62,7 +64,8 @@ namespace ProcDigital1
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.abrirImagenToolStripMenuItem});
+            this.abrirImagenToolStripMenuItem,
+            this.salarImagenToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(960, 24);
@@ -71,6 +74,8 @@ namespace ProcDigital1
             // 
             // abrirImagenToolStripMenuItem
             // 
+            this.abrirImagenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.salvarImagenToolStripMenuItem});
             this.abrirImagenToolStripMenuItem.Name = "abrirImagenToolStripMenuItem";
             this.abrirImagenToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
             this.abrirImagenToolStripMenuItem.Text = "Abrir Imagen";
@@ -172,6 +177,19 @@ namespace ProcDigital1
             this.labelValorTrackG.TabIndex = 4;
             this.labelValorTrackG.Text = "Valor";
             // 
+            // salvarImagenToolStripMenuItem
+            // 
+            this.salvarImagenToolStripMenuItem.Name = "salvarImagenToolStripMenuItem";
+            this.salvarImagenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salvarImagenToolStripMenuItem.Text = "Salvar imagen";
+            // 
+            // salarImagenToolStripMenuItem
+            // 
+            this.salarImagenToolStripMenuItem.Name = "salarImagenToolStripMenuItem";
+            this.salarImagenToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
+            this.salarImagenToolStripMenuItem.Text = "Salar imagen";
+            this.salarImagenToolStripMenuItem.Click += new System.EventHandler(this.salarImagenToolStripMenuItem_Click);
+            // 
             // Colorizar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -218,5 +236,7 @@ namespace ProcDigital1
         private System.Windows.Forms.Label labelValorTrackR;
         private System.Windows.Forms.Label labelValorTrackB;
         private System.Windows.Forms.Label labelValorTrackG;
+        private System.Windows.Forms.ToolStripMenuItem salvarImagenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salarImagenToolStripMenuItem;
     }
 }

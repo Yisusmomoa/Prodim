@@ -111,6 +111,15 @@ namespace ProcDigital1
             trackR = trackBarRed.Value;
         }
 
+        private void salarImagenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                resultante.Save(saveFileDialog1.FileName, System.Drawing.Imaging.ImageFormat.Png);
+
+            }
+        }
+
         private void trackBarBlue_Scroll(object sender, EventArgs e)
         {
             labelValorTrackB.Text = trackBarBlue.Value.ToString();

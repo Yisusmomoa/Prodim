@@ -433,6 +433,14 @@ namespace ProcDigital1
 
         }
 
+        private void brilloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Brillo frmBrillo = new Brillo();
+            frmBrillo.Show();
+
+            
+        }
+
         public void CerrarWebCam()
         {
             if (MiWebCam!=null && MiWebCam.IsRunning)

@@ -69,6 +69,7 @@ namespace ProcDigital1
             this.colorizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorizarGradienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.brilloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -130,7 +131,8 @@ namespace ProcDigital1
             this.gammaToolStripMenuItem,
             this.tonosDeGrisToolStripMenuItem,
             this.colorizarToolStripMenuItem,
-            this.colorizarGradienteToolStripMenuItem});
+            this.colorizarGradienteToolStripMenuItem,
+            this.brilloToolStripMenuItem});
             this.basicosToolStripMenuItem.Name = "basicosToolStripMenuItem";
             this.basicosToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.basicosToolStripMenuItem.Text = "Basicos";
@@ -394,6 +396,13 @@ namespace ProcDigital1
             this.colorizarGradienteToolStripMenuItem.Text = "Colorizar gradiente";
             this.colorizarGradienteToolStripMenuItem.Click += new System.EventHandler(this.colorizarGradienteToolStripMenuItem_Click);
             // 
+            // brilloToolStripMenuItem
+            // 
+            this.brilloToolStripMenuItem.Name = "brilloToolStripMenuItem";
+            this.brilloToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.brilloToolStripMenuItem.Text = "Brillo";
+            this.brilloToolStripMenuItem.Click += new System.EventHandler(this.brilloToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -472,6 +481,7 @@ namespace ProcDigital1
         private System.Windows.Forms.ToolStripMenuItem tonosDeGrisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem colorizarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem colorizarGradienteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem brilloToolStripMenuItem;
     }
 }
 

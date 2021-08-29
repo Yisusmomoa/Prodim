@@ -75,6 +75,12 @@
     <Compile Include="AnalizarTexto.Designer.cs">
       <DependentUpon>AnalizarTexto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Brillo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Brillo.Designer.cs">
+      <DependentUpon>Brillo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Colorizar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AnalizarTexto.resx">
       <DependentUpon>AnalizarTexto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Brillo.resx">
+      <DependentUpon>Brillo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Colorizar.resx">
       <DependentUpon>Colorizar.cs</DependentUpon>
