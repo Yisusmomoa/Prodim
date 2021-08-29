@@ -28,3 +28,4 @@ C:\Users\bjls2\source\repos\ProcDigital1\ProcDigital1\bin\Debug\x64\leptonica-1.
 C:\Users\bjls2\source\repos\ProcDigital1\ProcDigital1\bin\Debug\x64\tesseract41.dll
 C:\Users\bjls2\source\repos\ProcDigital1\ProcDigital1\bin\Debug\Tesseract.dll
 C:\Users\bjls2\source\repos\ProcDigital1\ProcDigital1\obj\Debug\ProcDigital1.AnalizarTexto.resources
+C:\Users\bjls2\source\repos\ProcDigital1\ProcDigital1\obj\Debug\ProcDigital1.Colorizar.resources

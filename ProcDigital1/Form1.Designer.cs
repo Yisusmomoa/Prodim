@@ -38,6 +38,9 @@ namespace ProcDigital1
             this.basicosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.invertirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filtroColoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aberracionCromaticaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gammaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.histogramasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.convolucionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +48,6 @@ namespace ProcDigital1
             this.cerrarCamaraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -57,17 +59,19 @@ namespace ProcDigital1
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.filtroColoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.radioRed = new System.Windows.Forms.RadioButton();
             this.radioGreen = new System.Windows.Forms.RadioButton();
             this.radioBlue = new System.Windows.Forms.RadioButton();
             this.checkBoxRed = new System.Windows.Forms.CheckBox();
             this.checkBoxBlue = new System.Windows.Forms.CheckBox();
             this.checkBoxGreen = new System.Windows.Forms.CheckBox();
-            this.aberracionCromaticaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tonosDeGrisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colorizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colorizarGradienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -122,24 +126,50 @@ namespace ProcDigital1
             this.testToolStripMenuItem,
             this.invertirToolStripMenuItem,
             this.filtroColoToolStripMenuItem,
-            this.aberracionCromaticaToolStripMenuItem});
+            this.aberracionCromaticaToolStripMenuItem,
+            this.gammaToolStripMenuItem,
+            this.tonosDeGrisToolStripMenuItem,
+            this.colorizarToolStripMenuItem,
+            this.colorizarGradienteToolStripMenuItem});
             this.basicosToolStripMenuItem.Name = "basicosToolStripMenuItem";
             this.basicosToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.basicosToolStripMenuItem.Text = "Basicos";
+            this.basicosToolStripMenuItem.Click += new System.EventHandler(this.basicosToolStripMenuItem_Click);
             // 
             // testToolStripMenuItem
             // 
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.testToolStripMenuItem.Text = "Test";
             this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
             // invertirToolStripMenuItem
             // 
             this.invertirToolStripMenuItem.Name = "invertirToolStripMenuItem";
-            this.invertirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.invertirToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.invertirToolStripMenuItem.Text = "Invertir";
             this.invertirToolStripMenuItem.Click += new System.EventHandler(this.invertirToolStripMenuItem_Click);
+            // 
+            // filtroColoToolStripMenuItem
+            // 
+            this.filtroColoToolStripMenuItem.Name = "filtroColoToolStripMenuItem";
+            this.filtroColoToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.filtroColoToolStripMenuItem.Text = "Filtro colo";
+            this.filtroColoToolStripMenuItem.Click += new System.EventHandler(this.filtroColoToolStripMenuItem_Click);
+            // 
+            // aberracionCromaticaToolStripMenuItem
+            // 
+            this.aberracionCromaticaToolStripMenuItem.Name = "aberracionCromaticaToolStripMenuItem";
+            this.aberracionCromaticaToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.aberracionCromaticaToolStripMenuItem.Text = "AberracionCromatica";
+            this.aberracionCromaticaToolStripMenuItem.Click += new System.EventHandler(this.aberracionCromaticaToolStripMenuItem_Click);
+            // 
+            // gammaToolStripMenuItem
+            // 
+            this.gammaToolStripMenuItem.Name = "gammaToolStripMenuItem";
+            this.gammaToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.gammaToolStripMenuItem.Text = "Gamma";
+            this.gammaToolStripMenuItem.Click += new System.EventHandler(this.gammaToolStripMenuItem_Click);
             // 
             // histogramasToolStripMenuItem
             // 
@@ -278,13 +308,6 @@ namespace ProcDigital1
             this.label7.TabIndex = 1;
             this.label7.Text = "Green";
             // 
-            // filtroColoToolStripMenuItem
-            // 
-            this.filtroColoToolStripMenuItem.Name = "filtroColoToolStripMenuItem";
-            this.filtroColoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.filtroColoToolStripMenuItem.Text = "Filtro colo";
-            this.filtroColoToolStripMenuItem.Click += new System.EventHandler(this.filtroColoToolStripMenuItem_Click);
-            // 
             // radioRed
             // 
             this.radioRed.AutoSize = true;
@@ -350,12 +373,26 @@ namespace ProcDigital1
             this.checkBoxGreen.Text = "Green";
             this.checkBoxGreen.UseVisualStyleBackColor = true;
             // 
-            // aberracionCromaticaToolStripMenuItem
+            // tonosDeGrisToolStripMenuItem
             // 
-            this.aberracionCromaticaToolStripMenuItem.Name = "aberracionCromaticaToolStripMenuItem";
-            this.aberracionCromaticaToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.aberracionCromaticaToolStripMenuItem.Text = "AberracionCromatica";
-            this.aberracionCromaticaToolStripMenuItem.Click += new System.EventHandler(this.aberracionCromaticaToolStripMenuItem_Click);
+            this.tonosDeGrisToolStripMenuItem.Name = "tonosDeGrisToolStripMenuItem";
+            this.tonosDeGrisToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.tonosDeGrisToolStripMenuItem.Text = "Tonos de gris";
+            this.tonosDeGrisToolStripMenuItem.Click += new System.EventHandler(this.tonosDeGrisToolStripMenuItem_Click);
+            // 
+            // colorizarToolStripMenuItem
+            // 
+            this.colorizarToolStripMenuItem.Name = "colorizarToolStripMenuItem";
+            this.colorizarToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.colorizarToolStripMenuItem.Text = "Colorizar";
+            this.colorizarToolStripMenuItem.Click += new System.EventHandler(this.colorizarToolStripMenuItem_Click);
+            // 
+            // colorizarGradienteToolStripMenuItem
+            // 
+            this.colorizarGradienteToolStripMenuItem.Name = "colorizarGradienteToolStripMenuItem";
+            this.colorizarGradienteToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.colorizarGradienteToolStripMenuItem.Text = "Colorizar gradiente";
+            this.colorizarGradienteToolStripMenuItem.Click += new System.EventHandler(this.colorizarGradienteToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -387,8 +424,8 @@ namespace ProcDigital1
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -431,6 +468,10 @@ namespace ProcDigital1
         private System.Windows.Forms.CheckBox checkBoxBlue;
         private System.Windows.Forms.CheckBox checkBoxGreen;
         private System.Windows.Forms.ToolStripMenuItem aberracionCromaticaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gammaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tonosDeGrisToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem colorizarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem colorizarGradienteToolStripMenuItem;
     }
 }
 

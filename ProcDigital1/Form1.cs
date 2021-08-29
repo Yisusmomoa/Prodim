@@ -14,7 +14,7 @@ namespace ProcDigital1
 {
     public partial class Form1 : Form
     {
-        private variablepruebagit;
+        private int variablepruebagit;
         //Camara
 
         private bool HayDispositivos;
@@ -342,6 +342,94 @@ namespace ProcDigital1
                 }
             }
             this.Invalidate();
+
+        }
+
+        private void gammaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int x = 0, y = 0;
+            resultante = new Bitmap(original.Width, original.Height);
+            Color rColor = new Color();
+            Color oColor = new Color();
+            float r = 0, g = 0, b = 0;
+            int n = 0;
+            //factor para el gamma
+
+            float rg = 1.1f;
+            float gg = 1.5f;
+            float bg = 0.9f;
+
+            int[] rGama = new int[256];
+            int[] gGama = new int[256];
+            int[] bGama = new int[256];
+            for (n = 0; n < 256; n++)
+            {
+                rGama[n] = Math.Min(255, (int)((255.0 * Math.Pow(n / 255.0f, 1.0f / rg)) + 0.5f));
+                gGama[n] = Math.Min(255, (int)((255.0 * Math.Pow(n / 255.0f, 1.0f / gg)) + 0.5f));
+                bGama[n] = Math.Min(255, (int)((255.0 * Math.Pow(n / 255.0f, 1.0f / bg)) + 0.5f));
+            }
+            //aplicamos el gama a la imagen
+            for ( x = 0; x < original.Width; x++)
+            {
+                for ( y = 0; y < original.Height; y++)
+                {
+                    //se obtiene el color del pixel
+
+                    oColor = original.GetPixel(x, y);
+                    r = rGama[oColor.R];
+                    g = gGama[oColor.G];
+                    b = bGama[oColor.B];
+                    rColor = Color.FromArgb((int)r, (int)g, (int)b);
+                    //se coloca el color resultante
+                    resultante.SetPixel(x, y, rColor);
+                }
+            }
+            this.Invalidate();
+        }
+
+        private void tonosDeGrisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //convertimos la imagen a tonos de gris
+
+
+            int x = 0, y = 0;
+            resultante = new Bitmap(original.Width, original.Height);
+            Color rColor = new Color();
+            Color oColor = new Color();
+
+            float g = 0;
+
+            for ( x = 0; x <original.Width; x++)
+            {
+                for ( y = 0; y < original.Height; y++)
+                {
+                    oColor = original.GetPixel(x, y);
+                    //cambia de color a tono de gris
+                    g = oColor.R * 0.299f + oColor.G * 0.587f + oColor.B * 0.114f;
+                    rColor = Color.FromArgb((int)g, (int)g, (int)g);
+                    //se coloca el color resultante
+                    resultante.SetPixel(x, y, rColor);
+                }
+            }
+            this.Invalidate();
+        }
+
+        private void colorizarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Colorizar frmcolorizar = new Colorizar();
+            frmcolorizar.Show();
+            
+        }
+
+        private void colorizarGradienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+
+            this.Invalidate();
+        }
+
+        private void basicosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
         }
 
