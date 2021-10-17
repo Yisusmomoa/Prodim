@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AForge.Video.DirectShow;
 using AForge.Video;
+using Emgu.CV;
+using Emgu.CV.Structure;
 
 namespace ProcDigital1
 {
@@ -18,23 +20,33 @@ namespace ProcDigital1
         //Camara
 
         private bool HayDispositivos;
-        private FilterInfoCollection MiDispositivos;
-        private VideoCaptureDevice MiWebCam;
-
+        private FilterInfoCollection MiDispositivos;//filter
+        private VideoCaptureDevice MiWebCam;//device
+        static readonly CascadeClassifier cascadeClassifier = new CascadeClassifier("haarcascade_frontalface_alt_tree.xml");
         //Camara
 
         private Bitmap original;
         private Bitmap resultante;
         private int[] histograma = new int[256];
+
+        //convolución
         private int[,] conv3x3 = new int[3, 3];
         private int factor;
         private int offset;
+        //convolución
+
+
+
+
 
         private int AnchoVentana, AltoVentana;
 
         private int trackR = 0, trackG = 0, trackB = 0;
 
         private int trackBrillo = 0, trackContraste = 0;
+
+        public int porcentajeRuido, rangoMinRuido, rangoMaxRuido;
+
         public Form1()
         {
             InitializeComponent();
@@ -44,6 +56,76 @@ namespace ProcDigital1
             AltoVentana = 600;
         }
 
+        private void Convolucion()
+        {
+            int x = 0, y = 0, z = 0, a = 0, b = 0;
+            Color oColor;
+            int sumaR = 0, sumaG = 0, sumaB=0;
+            for ( x = 1; x < original.Width-1; x++)
+            {
+                for ( y = 1; y < original.Height-1; y++)
+                {
+                    sumaR = 0; sumaG = 0; sumaB = 0;
+                    for ( a = -1; a < 2; a++)
+                    {
+                        for ( b = -1; b < 2; b++)
+                        {
+                            oColor = original.GetPixel(x + a, y + b);
+
+                            sumaR = sumaR + (oColor.R * conv3x3[a + 1, b + 1]);
+                            sumaG = sumaG + (oColor.G * conv3x3[a + 1, b + 1]);
+                            sumaB = sumaB + (oColor.B * conv3x3[a + 1, b + 1]);
+                        }
+                    }
+                    sumaR = (sumaR / factor) + offset;
+                    sumaG = (sumaG / factor) + offset;
+                    sumaB = (sumaB / factor) + offset;
+                    if (sumaR > 255)
+                        sumaR = 255;
+                    else if (sumaR < 0)
+                        sumaR = 0;
+
+                    if (sumaG > 255)
+                        sumaG = 255;
+                    else if (sumaG < 0)
+                        sumaG = 0;
+                    if (sumaB > 255)
+                        sumaB = 255;
+                    else if (sumaB < 0)
+                        sumaB = 0;
+                    resultante.SetPixel(x, y, Color.FromArgb(sumaR, sumaG, sumaB));
+                }
+            }
+
+        }
+
+        private void ConvGris(int [,] pmatriz, Bitmap pImagen, int pInferior, int pSuperior)
+        {
+            int x = 0, y = 0, z = 0, a = 0, b = 0;
+            Color oColor;
+            int suma = 0;
+            for ( x = 1; x < pImagen.Width-1; x++)
+            {
+                for ( y = 1; y < pImagen.Height-1; y++)
+                {
+                    suma = 0;
+                    for ( a = -1; a < 2; a++)
+                    {
+                        for (b = -1; b < 2; b++)
+                        {
+                            oColor = pImagen.GetPixel(x + a, y + b);
+                            suma = suma + (oColor.R * pmatriz[a + 1, b + 1]);
+                        }
+                    }
+                    if (suma < pInferior)
+                        suma = 0;
+                    else if (suma > pSuperior)
+                        suma = 255;
+                    resultante.SetPixel(x, y, Color.FromArgb(suma, suma, suma));
+                }
+            }
+        }
+        
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -80,7 +162,7 @@ namespace ProcDigital1
                 AutoScrollMinSize = new Size(AnchoVentana, AltoVentana);
                 //g.DrawImage(resultante, new Rectangle(this.AutoScrollPosition.X, this.AutoScrollPosition.Y + 60, AnchoVentana-300, AltoVentana-400));//img1 original
                 g.DrawImage(resultante, new Rectangle(this.AutoScrollPosition.X+30, this.AutoScrollPosition.Y + 60, 500, 400));//img1
-                g.DrawImage(original, new Rectangle(this.AutoScrollPosition.X+30, this.AutoScrollPosition.Y + 490, 408, 204));//img2
+                g.DrawImage(original, new Rectangle(this.AutoScrollPosition.X+90, this.AutoScrollPosition.Y + 490, 408, 204));//img2 original la que esta abajo pues 
                 g.Dispose();
             }
         }
@@ -126,6 +208,7 @@ namespace ProcDigital1
         private void Form1_Load(object sender, EventArgs e)
         {
             CargaDispositivos();
+
         }
 
         public void CargaDispositivos()
@@ -161,6 +244,18 @@ namespace ProcDigital1
         private void capturando(object sender, NewFrameEventArgs eventArgs)
         {
             Bitmap imgane = (Bitmap)eventArgs.Frame.Clone();
+            Image<Bgr, byte> grayImage = new Image<Bgr, byte>(imgane);
+            Rectangle[] rectangles = cascadeClassifier.DetectMultiScale(grayImage, 1.2, 1);
+            foreach (Rectangle rectangle in rectangles)
+            {
+                using (Graphics graphics = Graphics.FromImage(imgane))
+                {
+                    using (Pen pen=new Pen(Color.Red, 1))
+                    {
+                        graphics.DrawRectangle(pen, rectangle);
+                    }
+                }
+            }
             pictureBox1.Image = imgane;
         }
 
@@ -522,6 +617,145 @@ namespace ProcDigital1
             this.Invalidate();
         }
 
+        private void mosaicoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int x = 0, y = 0, z = 0;
+            int mosaico = 8;//la cantidad en la que se va a dividir cada pixel
+            int xm = 0, ym = 0;
+            Color rColor, oColor;
+            int rs=0, gs=0, bs = 0;
+            int r = 0, g = 0, b = 0;
+            resultante = new Bitmap(original.Width, original.Height);
+            for ( x = 0; x < original.Width-mosaico; x+=mosaico)
+            {
+                for ( y = 0; y < original.Height-mosaico; y+=mosaico)
+                {
+                    rs = 0; gs = 0; bs = 0;
+                    //obtenemos el promedio
+                    for ( xm = x; xm < (x+mosaico); xm++)
+                        for ( ym = y; ym < (y+mosaico); ym++)
+                        {
+                            oColor = original.GetPixel(xm, ym);
+                            rs += oColor.R;
+                            gs += oColor.G;
+                            bs += oColor.B;
+                        }
+                    r = rs / (mosaico * mosaico);
+                    g = gs / (mosaico * mosaico);
+                    b = bs / (mosaico * mosaico);
+                    rColor = Color.FromArgb(r, g, b);
+
+                    for ( xm = x; xm < (x+mosaico); xm++)
+                    {
+                        for (ym = y;  ym< (y+mosaico); ym++)
+                        {
+                            resultante.SetPixel(xm, ym, rColor);
+                        }
+                    }
+                }
+            }
+            this.Invalidate();
+        }
+
+        private void suavizadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            conv3x3= new int[,] { {1,1,1},
+                                  {1,1,1},
+                                  {1,1,1} };
+            factor = 9;
+            offset = 0;
+            Convolucion();
+            this.Invalidate();
+        }
+
+        private void gaussianoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            conv3x3 = new int[,] { {1,2,1},
+                                  {2,4,2},
+                                  {1,2,1} };
+
+            factor = 16;
+            offset = 32;//sirve para compensar si hay algún cambio en la iluminación
+            Convolucion();
+            this.Invalidate();
+
+        }
+
+        private void sharpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            conv3x3 = new int[,] { {0,-2,0 },
+                                 {-2,11,-2 },
+                                 {0,-2,0 } };
+            factor = 2;
+            offset = 96;
+            Convolucion();
+            this.Invalidate();
+        }
+
+        private void quickPhillipsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            conv3x3 = new int[,] { {-1,0,-1 },
+                                 {0,4,0 },
+                                 {-1,0,-1 } };
+            //ponemos la imagen en tonos de gris
+            tonosDeGrisToolStripMenuItem_Click(sender, e);
+            Bitmap intermedio = (Bitmap)resultante.Clone();
+            ConvGris(conv3x3, intermedio, 32, 64);
+            this.Invalidate();
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void histogramasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+
+
+        }
+
+        private void reconocimeintoFacialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PruebaReconocimiento1 frmReconocimiento = new PruebaReconocimiento1();
+            frmReconocimiento.Show();
+        }
+
+        private void hToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tonosDeGrisToolStripMenuItem_Click(sender, e);
+            int x = 0, y = 0;
+            Color rColor = new Color();
+            for (x = 0; x < original.Width; x++)
+            {
+                for (y = 0; y < original.Height; y++)
+                {
+                    rColor = resultante.GetPixel(x, y);
+                    histograma[rColor.R]++;
+                }
+            }
+            //HistoForm hform = new HistoForm(histograma);
+            //hform.Show();
+
+            int[] hs = new int[256];
+            int n = 0;
+            hs[0] = (histograma[0] + histograma[1]) / 2;
+            hs[255] = (histograma[255] + histograma[254]) / 2;
+            for (n=1; n<254;n++)
+            {
+                hs[n] = (histograma[n - 1] + histograma[n] + histograma[n + 1]) / 3;
+            }
+            HistoForm hform = new HistoForm(histograma);
+            hform.Show();
+
+        }
+
         private void flipHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int x = 0, y = 0;
@@ -541,6 +775,41 @@ namespace ProcDigital1
             }
             this.Invalidate();
 
+        }
+
+        private void ruidoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Ruido FormRuido = new Ruido();
+            FormRuido.Show();
+
+            int x = 0, y = 0; //, porcentajeRuido = 0;//porcentaje del ruido
+                              //0 a 200 sobre el cual va a aparecer el ruido a un pixel en particular
+                              //int rangoMinRuido =0, rangoMaxRuido = 0;
+                              // float pBrillo = 0;
+          
+            Random rnd = new Random();
+            Color rColor;
+            Color oColor;
+            //int r = 0, g = 0, b = 0;
+            resultante = new Bitmap(original.Width, original.Height);
+            for (x = 0; x < original.Width; x++)
+            {
+                for (y = 0; y < original.Height; y++)
+                {
+                    if (rnd.Next(1, 100) <= porcentajeRuido)
+                    {
+                        rColor = Color.FromArgb(rnd.Next(rangoMinRuido, rangoMaxRuido),
+                                                rnd.Next(rangoMinRuido, rangoMaxRuido),
+                                                rnd.Next(rangoMinRuido, rangoMaxRuido));
+                    }
+                    else
+                    {
+                        rColor = original.GetPixel(x, y);
+                    }
+                    resultante.SetPixel(x, y, rColor);
+                }
+            }
+            this.Invalidate();
         }
 
         private void trackBarContraste_Scroll(object sender, EventArgs e)

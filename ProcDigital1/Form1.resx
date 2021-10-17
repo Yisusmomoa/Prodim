@@ -126,6 +126,27 @@
   <metadata name="saveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>409, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAzdJREFUeF7tmjmOFTEURRuEYAkESEBGBgEZG4GEKYIIApDYER2BYAFsgCFgBSAW
+        QIJAYuYeqS0Z9/PwqtxUFd9XOlL9b79bfv6evqr2hoaGhoaGho5axyayaV0Wz8RH8VP8ckIMsXjgtSld
+        F9/F707ghecmdFF8FVYic/gmLolFZM3PHAzZtPHWEG8h9XkurHvmmKWT4r54Jb4Iq4EWaaNviOPCamAJ
+        Ym6K1M+6pwVtpu3kQC4unRFvRXpzLy/FXOFheXsgF3JqEr3VI3m4KuYKD8vbCzk1jQSGjGVgDbMS78QJ
+        MVd4vBfWPUpYOZBbVcybOOiJOC2seVqjlyzvGrSZtse5kFtRBLJ4xEEYbVW0Pc6F3MgxKwrj4cN1MWDl
+        cufTEsDnmDnq4VES3l07gOv4XM910TDRefFIvBAfBKc74JrvKKNOL9XyOaRagNvwQOfEvqDDQmwO6lCX
+        mLlyt7cW4DaUrolPIsS0Qgyxc+Ruby2Aa88UeChiv5TgY5UBZXhMVS2fQ2oJ4HNMTvx6sVfgtbgjLohT
+        B3DNd5Sl9fGYOhJoXy2fv+QOyIj5mw77z+KWKPlRRh3qxrF4TVkT3Pm4AzJiEQseQEJXRKuom3YCnl4t
+        0gFsY+lqz6/qFTGxB57eUbBIB7CXh3hgXns9EDFvROyFt0fufNwBhjjQhHhgcZsqYmMvvD1apAM41YV4
+        YIWfKmJjL7w9+ucdQF2OtnE829xUERu3B29ve1z5uAMSUXenOwDt9BRAO78IptsgW5nXAxGzyW2Qw0p6
+        ELotvCIm9tjMQQg9FsEDehyF8fRqsQ7I/RniVy35UUadNHm8zgqv3Pm4AwrK/R1mXt8VrPBsc8A136Vz
+        HvDY3N/hoAci9kuhrFaOx1Qt3gGIR1vpdGiBmLmP1lbRAYj5yyL2QwTvHNSh7pQ5n2o1HRDE4shezoGG
+        Ux1HW+Ca7yjzbnUlra4DUuF91P6r7oCj1qQO+N8fjlbV8/H4ktDmpyLOpfp4HPV6QWJprByaXpDo+YrM
+        mmh+RQb1eklqLZBL80tSQfTWPcFbWiwe1jBbM7SZtpND8y+fk7XIbIGhoaGhoaGhoaGhIUt7e38AI+y8
+        FN5UqawAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="bindingSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
   </metadata>

@@ -30,6 +30,7 @@ namespace ProcDigital1
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abrirImagenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,13 +46,22 @@ namespace ProcDigital1
             this.colorizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorizarGradienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brilloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contrasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.flipHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ruidoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mosaicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.histogramasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.convolucionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.suavizadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gaussianoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sharpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bordesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quickPhillipsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abrirCamaraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarCamaraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reconocimeintoFacialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -69,7 +79,6 @@ namespace ProcDigital1
             this.checkBoxRed = new System.Windows.Forms.CheckBox();
             this.checkBoxBlue = new System.Windows.Forms.CheckBox();
             this.checkBoxGreen = new System.Windows.Forms.CheckBox();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.labelBrillo = new System.Windows.Forms.Label();
             this.trackBarBrillo = new System.Windows.Forms.TrackBar();
             this.labelValorTrackG = new System.Windows.Forms.Label();
@@ -82,23 +91,31 @@ namespace ProcDigital1
             this.trackBarBlue = new System.Windows.Forms.TrackBar();
             this.trackBarRed = new System.Windows.Forms.TrackBar();
             this.label11 = new System.Windows.Forms.Label();
-            this.contrasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label13 = new System.Windows.Forms.Label();
             this.trackBarContraste = new System.Windows.Forms.TrackBar();
             this.labelContraste = new System.Windows.Forms.Label();
-            this.flipHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.hToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBrillo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBlue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarRed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarContraste)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.menuStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
             this.basicosToolStripMenuItem,
@@ -108,16 +125,19 @@ namespace ProcDigital1
             this.textToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1566, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1383, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // archivoToolStripMenuItem
             // 
+            this.archivoToolStripMenuItem.BackColor = System.Drawing.SystemColors.HotTrack;
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.abrirImagenToolStripMenuItem,
             this.salvarImagenToolStripMenuItem,
             this.salirToolStripMenuItem});
+            this.archivoToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.archivoToolStripMenuItem.Text = "Archivo";
@@ -156,7 +176,10 @@ namespace ProcDigital1
             this.colorizarGradienteToolStripMenuItem,
             this.brilloToolStripMenuItem,
             this.contrasteToolStripMenuItem,
-            this.flipHorizontalToolStripMenuItem});
+            this.flipHorizontalToolStripMenuItem,
+            this.ruidoToolStripMenuItem,
+            this.mosaicoToolStripMenuItem});
+            this.basicosToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.basicosToolStripMenuItem.Name = "basicosToolStripMenuItem";
             this.basicosToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.basicosToolStripMenuItem.Text = "Basicos";
@@ -225,23 +248,99 @@ namespace ProcDigital1
             this.brilloToolStripMenuItem.Text = "Brillo";
             this.brilloToolStripMenuItem.Click += new System.EventHandler(this.brilloToolStripMenuItem_Click);
             // 
+            // contrasteToolStripMenuItem
+            // 
+            this.contrasteToolStripMenuItem.Name = "contrasteToolStripMenuItem";
+            this.contrasteToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.contrasteToolStripMenuItem.Text = "Contraste";
+            this.contrasteToolStripMenuItem.Click += new System.EventHandler(this.contrasteToolStripMenuItem_Click);
+            // 
+            // flipHorizontalToolStripMenuItem
+            // 
+            this.flipHorizontalToolStripMenuItem.Name = "flipHorizontalToolStripMenuItem";
+            this.flipHorizontalToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.flipHorizontalToolStripMenuItem.Text = "Flip horizontal";
+            this.flipHorizontalToolStripMenuItem.Click += new System.EventHandler(this.flipHorizontalToolStripMenuItem_Click);
+            // 
+            // ruidoToolStripMenuItem
+            // 
+            this.ruidoToolStripMenuItem.Name = "ruidoToolStripMenuItem";
+            this.ruidoToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.ruidoToolStripMenuItem.Text = "Ruido";
+            this.ruidoToolStripMenuItem.Click += new System.EventHandler(this.ruidoToolStripMenuItem_Click);
+            // 
+            // mosaicoToolStripMenuItem
+            // 
+            this.mosaicoToolStripMenuItem.Name = "mosaicoToolStripMenuItem";
+            this.mosaicoToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.mosaicoToolStripMenuItem.Text = "Mosaico";
+            this.mosaicoToolStripMenuItem.Click += new System.EventHandler(this.mosaicoToolStripMenuItem_Click);
+            // 
             // histogramasToolStripMenuItem
             // 
+            this.histogramasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hToolStripMenuItem});
+            this.histogramasToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.histogramasToolStripMenuItem.Name = "histogramasToolStripMenuItem";
             this.histogramasToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.histogramasToolStripMenuItem.Text = "Histogramas";
+            this.histogramasToolStripMenuItem.Click += new System.EventHandler(this.histogramasToolStripMenuItem_Click);
             // 
             // convolucionToolStripMenuItem
             // 
+            this.convolucionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.suavizadoToolStripMenuItem,
+            this.gaussianoToolStripMenuItem,
+            this.sharpenToolStripMenuItem,
+            this.bordesToolStripMenuItem});
+            this.convolucionToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.convolucionToolStripMenuItem.Name = "convolucionToolStripMenuItem";
             this.convolucionToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.convolucionToolStripMenuItem.Text = "Convolucion";
+            // 
+            // suavizadoToolStripMenuItem
+            // 
+            this.suavizadoToolStripMenuItem.Name = "suavizadoToolStripMenuItem";
+            this.suavizadoToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.suavizadoToolStripMenuItem.Text = "suavizado";
+            this.suavizadoToolStripMenuItem.Click += new System.EventHandler(this.suavizadoToolStripMenuItem_Click);
+            // 
+            // gaussianoToolStripMenuItem
+            // 
+            this.gaussianoToolStripMenuItem.Name = "gaussianoToolStripMenuItem";
+            this.gaussianoToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.gaussianoToolStripMenuItem.Text = "gaussiano";
+            this.gaussianoToolStripMenuItem.Click += new System.EventHandler(this.gaussianoToolStripMenuItem_Click);
+            // 
+            // sharpenToolStripMenuItem
+            // 
+            this.sharpenToolStripMenuItem.Name = "sharpenToolStripMenuItem";
+            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.sharpenToolStripMenuItem.Text = "Sharpen";
+            this.sharpenToolStripMenuItem.Click += new System.EventHandler(this.sharpenToolStripMenuItem_Click);
+            // 
+            // bordesToolStripMenuItem
+            // 
+            this.bordesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.quickPhillipsToolStripMenuItem});
+            this.bordesToolStripMenuItem.Name = "bordesToolStripMenuItem";
+            this.bordesToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.bordesToolStripMenuItem.Text = "Bordes";
+            // 
+            // quickPhillipsToolStripMenuItem
+            // 
+            this.quickPhillipsToolStripMenuItem.Name = "quickPhillipsToolStripMenuItem";
+            this.quickPhillipsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.quickPhillipsToolStripMenuItem.Text = "QuickPhillips";
+            this.quickPhillipsToolStripMenuItem.Click += new System.EventHandler(this.quickPhillipsToolStripMenuItem_Click);
             // 
             // videoToolStripMenuItem
             // 
             this.videoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.abrirCamaraToolStripMenuItem,
-            this.cerrarCamaraToolStripMenuItem});
+            this.cerrarCamaraToolStripMenuItem,
+            this.reconocimeintoFacialToolStripMenuItem});
+            this.videoToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.videoToolStripMenuItem.Name = "videoToolStripMenuItem";
             this.videoToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.videoToolStripMenuItem.Text = "Video";
@@ -249,29 +348,28 @@ namespace ProcDigital1
             // abrirCamaraToolStripMenuItem
             // 
             this.abrirCamaraToolStripMenuItem.Name = "abrirCamaraToolStripMenuItem";
-            this.abrirCamaraToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.abrirCamaraToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.abrirCamaraToolStripMenuItem.Text = "Abrir Camara";
             // 
             // cerrarCamaraToolStripMenuItem
             // 
             this.cerrarCamaraToolStripMenuItem.Name = "cerrarCamaraToolStripMenuItem";
-            this.cerrarCamaraToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.cerrarCamaraToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.cerrarCamaraToolStripMenuItem.Text = "Cerrar Camara";
+            // 
+            // reconocimeintoFacialToolStripMenuItem
+            // 
+            this.reconocimeintoFacialToolStripMenuItem.Name = "reconocimeintoFacialToolStripMenuItem";
+            this.reconocimeintoFacialToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.reconocimeintoFacialToolStripMenuItem.Text = "reconocimeinto facial";
+            this.reconocimeintoFacialToolStripMenuItem.Click += new System.EventHandler(this.reconocimeintoFacialToolStripMenuItem_Click);
             // 
             // textToolStripMenuItem
             // 
+            this.textToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.textToolStripMenuItem.Name = "textToolStripMenuItem";
             this.textToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.textToolStripMenuItem.Text = "Text";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1353, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Histograma";
             // 
             // label3
             // 
@@ -294,7 +392,7 @@ namespace ProcDigital1
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 506);
+            this.label5.Location = new System.Drawing.Point(49, 506);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(42, 13);
             this.label5.TabIndex = 3;
@@ -318,18 +416,23 @@ namespace ProcDigital1
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(814, 493);
+            this.button1.BackColor = System.Drawing.SystemColors.GrayText;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.HotTrack;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(814, 472);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(152, 23);
+            this.button1.Size = new System.Drawing.Size(158, 47);
             this.button1.TabIndex = 7;
-            this.button1.Text = "Camara";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(756, 477);
+            this.label6.Location = new System.Drawing.Point(659, 477);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 13);
             this.label6.TabIndex = 9;
@@ -338,16 +441,17 @@ namespace ProcDigital1
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1292, 56);
+            this.label2.Location = new System.Drawing.Point(33, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(27, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Red";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1292, 238);
+            this.label4.Location = new System.Drawing.Point(32, 216);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(28, 13);
             this.label4.TabIndex = 1;
@@ -356,7 +460,7 @@ namespace ProcDigital1
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1292, 410);
+            this.label7.Location = new System.Drawing.Point(24, 391);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(36, 13);
             this.label7.TabIndex = 1;
@@ -366,7 +470,7 @@ namespace ProcDigital1
             // 
             this.radioRed.AutoSize = true;
             this.radioRed.Checked = true;
-            this.radioRed.Location = new System.Drawing.Point(856, 51);
+            this.radioRed.Location = new System.Drawing.Point(1329, 678);
             this.radioRed.Name = "radioRed";
             this.radioRed.Size = new System.Drawing.Size(45, 17);
             this.radioRed.TabIndex = 10;
@@ -378,7 +482,7 @@ namespace ProcDigital1
             // radioGreen
             // 
             this.radioGreen.AutoSize = true;
-            this.radioGreen.Location = new System.Drawing.Point(856, 86);
+            this.radioGreen.Location = new System.Drawing.Point(1329, 713);
             this.radioGreen.Name = "radioGreen";
             this.radioGreen.Size = new System.Drawing.Size(54, 17);
             this.radioGreen.TabIndex = 10;
@@ -389,7 +493,7 @@ namespace ProcDigital1
             // radioBlue
             // 
             this.radioBlue.AutoSize = true;
-            this.radioBlue.Location = new System.Drawing.Point(856, 127);
+            this.radioBlue.Location = new System.Drawing.Point(1329, 754);
             this.radioBlue.Name = "radioBlue";
             this.radioBlue.Size = new System.Drawing.Size(46, 17);
             this.radioBlue.TabIndex = 10;
@@ -400,7 +504,8 @@ namespace ProcDigital1
             // checkBoxRed
             // 
             this.checkBoxRed.AutoSize = true;
-            this.checkBoxRed.Location = new System.Drawing.Point(725, 52);
+            this.checkBoxRed.ForeColor = System.Drawing.Color.Red;
+            this.checkBoxRed.Location = new System.Drawing.Point(6, 19);
             this.checkBoxRed.Name = "checkBoxRed";
             this.checkBoxRed.Size = new System.Drawing.Size(46, 17);
             this.checkBoxRed.TabIndex = 11;
@@ -410,7 +515,8 @@ namespace ProcDigital1
             // checkBoxBlue
             // 
             this.checkBoxBlue.AutoSize = true;
-            this.checkBoxBlue.Location = new System.Drawing.Point(725, 127);
+            this.checkBoxBlue.ForeColor = System.Drawing.Color.Blue;
+            this.checkBoxBlue.Location = new System.Drawing.Point(6, 94);
             this.checkBoxBlue.Name = "checkBoxBlue";
             this.checkBoxBlue.Size = new System.Drawing.Size(47, 17);
             this.checkBoxBlue.TabIndex = 11;
@@ -420,7 +526,8 @@ namespace ProcDigital1
             // checkBoxGreen
             // 
             this.checkBoxGreen.AutoSize = true;
-            this.checkBoxGreen.Location = new System.Drawing.Point(725, 87);
+            this.checkBoxGreen.ForeColor = System.Drawing.Color.LawnGreen;
+            this.checkBoxGreen.Location = new System.Drawing.Point(6, 54);
             this.checkBoxGreen.Name = "checkBoxGreen";
             this.checkBoxGreen.Size = new System.Drawing.Size(55, 17);
             this.checkBoxGreen.TabIndex = 11;
@@ -431,7 +538,7 @@ namespace ProcDigital1
             // 
             this.labelBrillo.AutoSize = true;
             this.labelBrillo.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBrillo.Location = new System.Drawing.Point(801, 194);
+            this.labelBrillo.Location = new System.Drawing.Point(801, 179);
             this.labelBrillo.Name = "labelBrillo";
             this.labelBrillo.Size = new System.Drawing.Size(20, 22);
             this.labelBrillo.TabIndex = 13;
@@ -439,7 +546,7 @@ namespace ProcDigital1
             // 
             // trackBarBrillo
             // 
-            this.trackBarBrillo.Location = new System.Drawing.Point(693, 162);
+            this.trackBarBrillo.Location = new System.Drawing.Point(693, 147);
             this.trackBarBrillo.Maximum = 255;
             this.trackBarBrillo.Minimum = -255;
             this.trackBarBrillo.Name = "trackBarBrillo";
@@ -450,7 +557,7 @@ namespace ProcDigital1
             // labelValorTrackG
             // 
             this.labelValorTrackG.AutoSize = true;
-            this.labelValorTrackG.Location = new System.Drawing.Point(776, 399);
+            this.labelValorTrackG.Location = new System.Drawing.Point(154, 128);
             this.labelValorTrackG.Name = "labelValorTrackG";
             this.labelValorTrackG.Size = new System.Drawing.Size(31, 13);
             this.labelValorTrackG.TabIndex = 20;
@@ -459,7 +566,7 @@ namespace ProcDigital1
             // labelValorTrackB
             // 
             this.labelValorTrackB.AutoSize = true;
-            this.labelValorTrackB.Location = new System.Drawing.Point(776, 450);
+            this.labelValorTrackB.Location = new System.Drawing.Point(154, 189);
             this.labelValorTrackB.Name = "labelValorTrackB";
             this.labelValorTrackB.Size = new System.Drawing.Size(31, 13);
             this.labelValorTrackB.TabIndex = 21;
@@ -468,7 +575,9 @@ namespace ProcDigital1
             // labelValorTrackR
             // 
             this.labelValorTrackR.AutoSize = true;
-            this.labelValorTrackR.Location = new System.Drawing.Point(781, 348);
+            this.labelValorTrackR.BackColor = System.Drawing.Color.Transparent;
+            this.labelValorTrackR.ForeColor = System.Drawing.SystemColors.Control;
+            this.labelValorTrackR.Location = new System.Drawing.Point(154, 64);
             this.labelValorTrackR.Name = "labelValorTrackR";
             this.labelValorTrackR.Size = new System.Drawing.Size(31, 13);
             this.labelValorTrackR.TabIndex = 22;
@@ -477,7 +586,7 @@ namespace ProcDigital1
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(657, 377);
+            this.label8.Location = new System.Drawing.Point(24, 90);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(36, 13);
             this.label8.TabIndex = 17;
@@ -486,7 +595,7 @@ namespace ProcDigital1
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(657, 418);
+            this.label9.Location = new System.Drawing.Point(24, 157);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(28, 13);
             this.label9.TabIndex = 18;
@@ -495,7 +604,7 @@ namespace ProcDigital1
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(657, 328);
+            this.label10.Location = new System.Drawing.Point(27, 32);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(27, 13);
             this.label10.TabIndex = 19;
@@ -503,7 +612,7 @@ namespace ProcDigital1
             // 
             // trackBarGreen
             // 
-            this.trackBarGreen.Location = new System.Drawing.Point(693, 367);
+            this.trackBarGreen.Location = new System.Drawing.Point(60, 80);
             this.trackBarGreen.Maximum = 250;
             this.trackBarGreen.Minimum = 1;
             this.trackBarGreen.Name = "trackBarGreen";
@@ -514,7 +623,7 @@ namespace ProcDigital1
             // 
             // trackBarBlue
             // 
-            this.trackBarBlue.Location = new System.Drawing.Point(693, 418);
+            this.trackBarBlue.Location = new System.Drawing.Point(60, 157);
             this.trackBarBlue.Maximum = 250;
             this.trackBarBlue.Minimum = 1;
             this.trackBarBlue.Name = "trackBarBlue";
@@ -525,7 +634,7 @@ namespace ProcDigital1
             // 
             // trackBarRed
             // 
-            this.trackBarRed.Location = new System.Drawing.Point(693, 316);
+            this.trackBarRed.Location = new System.Drawing.Point(60, 16);
             this.trackBarRed.Maximum = 250;
             this.trackBarRed.Minimum = 1;
             this.trackBarRed.Name = "trackBarRed";
@@ -537,23 +646,16 @@ namespace ProcDigital1
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(652, 162);
+            this.label11.Location = new System.Drawing.Point(652, 147);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(29, 13);
             this.label11.TabIndex = 19;
             this.label11.Text = "Brillo";
             // 
-            // contrasteToolStripMenuItem
-            // 
-            this.contrasteToolStripMenuItem.Name = "contrasteToolStripMenuItem";
-            this.contrasteToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.contrasteToolStripMenuItem.Text = "Contraste";
-            this.contrasteToolStripMenuItem.Click += new System.EventHandler(this.contrasteToolStripMenuItem_Click);
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(629, 213);
+            this.label13.Location = new System.Drawing.Point(629, 204);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(52, 13);
             this.label13.TabIndex = 19;
@@ -561,7 +663,7 @@ namespace ProcDigital1
             // 
             // trackBarContraste
             // 
-            this.trackBarContraste.Location = new System.Drawing.Point(693, 213);
+            this.trackBarContraste.Location = new System.Drawing.Point(693, 204);
             this.trackBarContraste.Maximum = 100;
             this.trackBarContraste.Minimum = -100;
             this.trackBarContraste.Name = "trackBarContraste";
@@ -573,42 +675,76 @@ namespace ProcDigital1
             // 
             this.labelContraste.AutoSize = true;
             this.labelContraste.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelContraste.Location = new System.Drawing.Point(801, 238);
+            this.labelContraste.Location = new System.Drawing.Point(801, 229);
             this.labelContraste.Name = "labelContraste";
             this.labelContraste.Size = new System.Drawing.Size(20, 22);
             this.labelContraste.TabIndex = 24;
             this.labelContraste.Text = "0";
             // 
-            // flipHorizontalToolStripMenuItem
+            // groupBox1
             // 
-            this.flipHorizontalToolStripMenuItem.Name = "flipHorizontalToolStripMenuItem";
-            this.flipHorizontalToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.flipHorizontalToolStripMenuItem.Text = "Flip horizontal";
-            this.flipHorizontalToolStripMenuItem.Click += new System.EventHandler(this.flipHorizontalToolStripMenuItem_Click);
+            this.groupBox1.Controls.Add(this.checkBoxRed);
+            this.groupBox1.Controls.Add(this.checkBoxBlue);
+            this.groupBox1.Controls.Add(this.checkBoxGreen);
+            this.groupBox1.Location = new System.Drawing.Point(759, 27);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(97, 114);
+            this.groupBox1.TabIndex = 25;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Filtro Color";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Location = new System.Drawing.Point(994, 27);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(381, 593);
+            this.groupBox2.TabIndex = 26;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Histograma";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.trackBarRed);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.labelValorTrackR);
+            this.groupBox3.Controls.Add(this.trackBarGreen);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.labelValorTrackB);
+            this.groupBox3.Controls.Add(this.labelValorTrackG);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.trackBarBlue);
+            this.groupBox3.Location = new System.Drawing.Point(632, 254);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(314, 209);
+            this.groupBox3.TabIndex = 27;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Colorizar";
+            // 
+            // hToolStripMenuItem
+            // 
+            this.hToolStripMenuItem.Name = "hToolStripMenuItem";
+            this.hToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.hToolStripMenuItem.Text = "HistogramaTonosGrises";
+            this.hToolStripMenuItem.Click += new System.EventHandler(this.hToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1566, 829);
+            this.BackColor = System.Drawing.SystemColors.GrayText;
+            this.ClientSize = new System.Drawing.Size(1383, 829);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.labelContraste);
             this.Controls.Add(this.trackBarContraste);
-            this.Controls.Add(this.labelValorTrackG);
-            this.Controls.Add(this.labelValorTrackB);
-            this.Controls.Add(this.labelValorTrackR);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.trackBarGreen);
-            this.Controls.Add(this.trackBarBlue);
-            this.Controls.Add(this.trackBarRed);
             this.Controls.Add(this.labelBrillo);
             this.Controls.Add(this.trackBarBrillo);
-            this.Controls.Add(this.checkBoxGreen);
-            this.Controls.Add(this.checkBoxBlue);
-            this.Controls.Add(this.checkBoxRed);
             this.Controls.Add(this.radioBlue);
             this.Controls.Add(this.radioGreen);
             this.Controls.Add(this.radioRed);
@@ -618,26 +754,29 @@ namespace ProcDigital1
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
+            this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Prodicm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBrillo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGreen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBlue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarRed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarContraste)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -657,7 +796,6 @@ namespace ProcDigital1
         private System.Windows.Forms.ToolStripMenuItem videoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem abrirCamaraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarCamaraToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
@@ -702,6 +840,18 @@ namespace ProcDigital1
         private System.Windows.Forms.TrackBar trackBarContraste;
         private System.Windows.Forms.Label labelContraste;
         private System.Windows.Forms.ToolStripMenuItem flipHorizontalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ruidoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mosaicoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem suavizadoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gaussianoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sharpenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bordesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quickPhillipsToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ToolStripMenuItem reconocimeintoFacialToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hToolStripMenuItem;
     }
 }
 

@@ -120,6 +120,11 @@ namespace ProcDigital1
             }
         }
 
+        private void Colorizar_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void trackBarBlue_Scroll(object sender, EventArgs e)
         {
             labelValorTrackB.Text = trackBarBlue.Value.ToString();

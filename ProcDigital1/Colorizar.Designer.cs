@@ -209,6 +209,7 @@ namespace ProcDigital1
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Colorizar";
             this.Text = "Colorizar";
+            this.Load += new System.EventHandler(this.Colorizar_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Colorizar_Paint);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
