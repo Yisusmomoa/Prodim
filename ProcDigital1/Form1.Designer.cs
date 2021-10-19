@@ -51,6 +51,7 @@ namespace ProcDigital1
             this.ruidoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mosaicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.histogramasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.convolucionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.suavizadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gaussianoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,7 +99,7 @@ namespace ProcDigital1
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.hToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sobelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBrillo)).BeginInit();
@@ -286,6 +287,13 @@ namespace ProcDigital1
             this.histogramasToolStripMenuItem.Text = "Histogramas";
             this.histogramasToolStripMenuItem.Click += new System.EventHandler(this.histogramasToolStripMenuItem_Click);
             // 
+            // hToolStripMenuItem
+            // 
+            this.hToolStripMenuItem.Name = "hToolStripMenuItem";
+            this.hToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hToolStripMenuItem.Text = "Histograma";
+            this.hToolStripMenuItem.Click += new System.EventHandler(this.hToolStripMenuItem_Click);
+            // 
             // convolucionToolStripMenuItem
             // 
             this.convolucionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -301,30 +309,31 @@ namespace ProcDigital1
             // suavizadoToolStripMenuItem
             // 
             this.suavizadoToolStripMenuItem.Name = "suavizadoToolStripMenuItem";
-            this.suavizadoToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.suavizadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.suavizadoToolStripMenuItem.Text = "suavizado";
             this.suavizadoToolStripMenuItem.Click += new System.EventHandler(this.suavizadoToolStripMenuItem_Click);
             // 
             // gaussianoToolStripMenuItem
             // 
             this.gaussianoToolStripMenuItem.Name = "gaussianoToolStripMenuItem";
-            this.gaussianoToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.gaussianoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gaussianoToolStripMenuItem.Text = "gaussiano";
             this.gaussianoToolStripMenuItem.Click += new System.EventHandler(this.gaussianoToolStripMenuItem_Click);
             // 
             // sharpenToolStripMenuItem
             // 
             this.sharpenToolStripMenuItem.Name = "sharpenToolStripMenuItem";
-            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.sharpenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sharpenToolStripMenuItem.Text = "Sharpen";
             this.sharpenToolStripMenuItem.Click += new System.EventHandler(this.sharpenToolStripMenuItem_Click);
             // 
             // bordesToolStripMenuItem
             // 
             this.bordesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.quickPhillipsToolStripMenuItem});
+            this.quickPhillipsToolStripMenuItem,
+            this.sobelToolStripMenuItem});
             this.bordesToolStripMenuItem.Name = "bordesToolStripMenuItem";
-            this.bordesToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.bordesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.bordesToolStripMenuItem.Text = "Bordes";
             // 
             // quickPhillipsToolStripMenuItem
@@ -723,12 +732,12 @@ namespace ProcDigital1
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Colorizar";
             // 
-            // hToolStripMenuItem
+            // sobelToolStripMenuItem
             // 
-            this.hToolStripMenuItem.Name = "hToolStripMenuItem";
-            this.hToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.hToolStripMenuItem.Text = "HistogramaTonosGrises";
-            this.hToolStripMenuItem.Click += new System.EventHandler(this.hToolStripMenuItem_Click);
+            this.sobelToolStripMenuItem.Name = "sobelToolStripMenuItem";
+            this.sobelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sobelToolStripMenuItem.Text = "Sobel";
+            this.sobelToolStripMenuItem.Click += new System.EventHandler(this.sobelToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -852,6 +861,7 @@ namespace ProcDigital1
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ToolStripMenuItem reconocimeintoFacialToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sobelToolStripMenuItem;
     }
 }
 

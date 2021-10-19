@@ -28,6 +28,9 @@ namespace ProcDigital1
         private Bitmap original;
         private Bitmap resultante;
         private int[] histograma = new int[256];
+        private int[] histogramaR = new int[256];
+        private int[] histogramaG = new int[256];
+        private int[] histogramaB = new int[256];
 
         //convolución
         private int[,] conv3x3 = new int[3, 3];
@@ -729,7 +732,7 @@ namespace ProcDigital1
 
         private void hToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            tonosDeGrisToolStripMenuItem_Click(sender, e);
+            //tonosDeGrisToolStripMenuItem_Click(sender, e);
             int x = 0, y = 0;
             Color rColor = new Color();
             for (x = 0; x < original.Width; x++)
@@ -737,22 +740,67 @@ namespace ProcDigital1
                 for (y = 0; y < original.Height; y++)
                 {
                     rColor = resultante.GetPixel(x, y);
-                    histograma[rColor.R]++;
+                    // histograma[rColor.R]++;
+                    histogramaR[rColor.R]++;
+                    histogramaG[rColor.G]++;
+                    histogramaB[rColor.B]++;
                 }
             }
-            //HistoForm hform = new HistoForm(histograma);
-            //hform.Show();
+            HistoForm hformR = new HistoForm(histogramaR,1);
+            hformR.Show();
 
-            int[] hs = new int[256];
-            int n = 0;
-            hs[0] = (histograma[0] + histograma[1]) / 2;
-            hs[255] = (histograma[255] + histograma[254]) / 2;
-            for (n=1; n<254;n++)
-            {
-                hs[n] = (histograma[n - 1] + histograma[n] + histograma[n + 1]) / 3;
-            }
-            HistoForm hform = new HistoForm(histograma);
-            hform.Show();
+            HistoForm hformG = new HistoForm(histogramaG,2);
+            hformG.Show();
+
+            HistoForm hformB = new HistoForm(histogramaB,3);
+            hformB.Show();
+
+            //int[] hs = new int[256];
+            //int n = 0;
+            //hs[0] = (histograma[0] + histograma[1]) / 2;
+            //hs[255] = (histograma[255] + histograma[254]) / 2;
+            //for (n=1; n<254;n++)
+            //{
+            //    hs[n] = (histograma[n - 1] + histograma[n] + histograma[n + 1]) / 3;
+            //}
+            //HistoForm hform2 = new HistoForm(histograma);
+            //hform2.Show();
+
+        }
+
+        private void sobelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int[,] sobel0 = new int[,] { { 1, 2, 1 } ,
+                                         {0,0,0 },
+                                        {-1,-2,-1 }};
+
+            int[,] sobel1 = new int[,] { { 2, 1, 0 } ,
+                                         {1,0,-1 },
+                                        {0,-1,-2 }};
+
+            int[,] sobel2 = new int[,] { { 1, 0, -1 } ,
+                                         {2,0,-2 },
+                                        {1,0,-1 }};
+
+            int[,] sobel3 = new int[,] { { 0, -1, -2 } ,
+                                         {1,0,-1 },
+                                        {2,1,0 }};
+
+            int[,] sobel4 = new int[,] { { -1, -2, -1 } ,
+                                         {0,0,0 },
+                                        {1,2,1 }};
+            int[,] sobel5 = new int[,] { { -2, -1, 0 } ,
+                                         {-1,0,1 },
+                                        {0,1,2 }};
+
+            int[,] sobel6 = new int[,] { { -2, -1, 0 } ,
+                                         {-1,0,1 },
+                                        {0,1,2 }};
+
+            tonosDeGrisToolStripMenuItem_Click(sender, e);
+            Bitmap intermedio = (Bitmap)resultante.Clone();
+            ConvGris(sobel0, intermedio, 0, 255);
+            this.Invalidate();
 
         }
 

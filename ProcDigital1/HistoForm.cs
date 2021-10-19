@@ -14,10 +14,12 @@ namespace ProcDigital1
     {
         private int[] histograma;
         private int mayor;
-        public HistoForm(int[] pHistograma)
+        private int ColorOpcion = 0;
+        public HistoForm(int[] pHistograma, int pColorOpcion)
         {
             InitializeComponent();
             histograma = pHistograma;
+            ColorOpcion = pColorOpcion;
             int n = 0;
             mayor = 0;
             //encontramoms el mayor
@@ -33,6 +35,7 @@ namespace ProcDigital1
                 histograma[n] = (int)((float)histograma[n] / (float)mayor * 256.0f);
             }
         }
+       
 
         private void HistoForm_Load(object sender, EventArgs e)
         {
@@ -44,14 +47,43 @@ namespace ProcDigital1
             int n = 0;
             int altura = 0;
             Graphics g = e.Graphics;
-            Pen plumaH = new Pen(Color.Black);
-            Pen plumaEjes = new Pen(Color.Coral);
-            g.DrawLine(plumaEjes, 19, 271, 277, 271);   
-            g.DrawLine(plumaEjes, 19, 270, 19, 14);
-            for (n=0; n<256;n++)
+            if (ColorOpcion==1)//R
             {
-                g.DrawLine(plumaH, n + 20, 270, n + 20, 270 - histograma[n]);
+                Pen plumaH = new Pen(Color.Red);
+                Pen plumaEjes = new Pen(Color.Black);
+                g.DrawLine(plumaEjes, 19, 271, 277, 271);
+                g.DrawLine(plumaEjes, 19, 270, 19, 14);
+                for (n = 0; n < 256; n++)
+                {
+                    g.DrawLine(plumaH, n + 20, 270, n + 20, 270 - histograma[n]);
+                    //g.DrawLine(plumaEjes, n + 20, 270, n + 20, 270 - histograma[n]);
+                }
             }
+            else if (ColorOpcion == 2)//G
+            {
+                Pen plumaH = new Pen(Color.Green);
+                Pen plumaEjes = new Pen(Color.Black);
+                g.DrawLine(plumaEjes, 19, 271, 277, 271);
+                g.DrawLine(plumaEjes, 19, 270, 19, 14);
+                for (n = 0; n < 256; n++)
+                {
+                    g.DrawLine(plumaH, n + 20, 270, n + 20, 270 - histograma[n]);
+                    //g.DrawLine(plumaEjes, n + 20, 270, n + 20, 270 - histograma[n]);
+                }
+            }
+            else if (ColorOpcion == 3)//B
+            {
+                Pen plumaH = new Pen(Color.Blue);
+                Pen plumaEjes = new Pen(Color.Black);
+                g.DrawLine(plumaEjes, 19, 271, 277, 271);
+                g.DrawLine(plumaEjes, 19, 270, 19, 14);
+                for (n = 0; n < 256; n++)
+                {
+                    g.DrawLine(plumaH, n + 20, 270, n + 20, 270 - histograma[n]);
+                    //g.DrawLine(plumaEjes, n + 20, 270, n + 20, 270 - histograma[n]);
+                }
+            }
+           
 
         }
     }
