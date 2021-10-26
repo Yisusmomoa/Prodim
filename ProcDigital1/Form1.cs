@@ -954,36 +954,39 @@ namespace ProcDigital1
 
         private void norteEsteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //conv3x3 = new int[,] {  {1,1,1 },
-            //                        {1,-2,-1},
-            //                        {1,-1,-1} };
-            //factor = 16;
-            //offset = 64;//sirve para compensar si hay algún cambio en la iluminación
-            //Convolucion();
-            //this.Invalidate();
+            conv3x3 = new int[,] {  {1,1,1 },
+                                    {1,-2,-1},
+                                    {1,-1,-1} };
+            factor = 16;
+            offset = 64;//sirve para compensar si hay algún cambio en la iluminación
+            tonosDeGrisToolStripMenuItem_Click(sender, e);
+            Convolucion();
+            this.Invalidate();
 
-            int[,] NoroEste =
-           {
-                {1,1,1 },
-                {1,-2,-1 },
-                {1,-1,-1 }
-            };
-            resultante = new Bitmap(original.Width, original.Height);
-            for (int x = 0; x < original.Width; x++)
-            {
-                for (int y = 0; y < original.Height; y++)
-                {
-                    Color xy11 = original.GetPixel(x - 1, y - 1);
-                    Color xy12 = original.GetPixel(x, y - 1);
-                    Color xy13 = original.GetPixel(x + 1, y - 1);
-                    Color xy21 = original.GetPixel(x - 1, y);
-                    Color xy22 = original.GetPixel(x , y);
-                    Color xy23 = original.GetPixel(x + 1, y);
-                    Color xy31 = original.GetPixel(x - 1, y + 1);
-                    Color xy32 = original.GetPixel(x, y + 1);
-                    Color xy33 = original.GetPixel(x+1, y + 1);
-                }
-            }
+            //int[,] NoroEste =
+            //{
+            //    {1,1,1},
+            //    {1,-2,-1},
+            //    {1,-1,-1}
+            //};
+            //resultante = new Bitmap(original.Width, original.Height);
+            //for (int x = 1; x < original.Width-1; x++)
+            //{
+            //    for (int y = 1; y < original.Height-1; y++)
+            //    {
+            //        Color xy11 = original.GetPixel(x - 1, y - 1);
+            //        Color xy12 = original.GetPixel(x, y - 1);
+            //        Color xy13 = original.GetPixel(x + 1, y - 1);
+            //        Color xy21 = original.GetPixel(x - 1, y);
+            //        Color xy22 = original.GetPixel(x , y);
+            //        Color xy23 = original.GetPixel(x + 1, y);
+            //        Color xy31 = original.GetPixel(x - 1, y + 1);
+            //        Color xy32 = original.GetPixel(x, y + 1);
+            //        Color xy33 = original.GetPixel(x+1, y + 1);
+
+
+            //    }
+            //}
         }
 
         private void flipHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
