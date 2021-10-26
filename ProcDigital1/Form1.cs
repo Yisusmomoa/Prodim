@@ -83,6 +83,7 @@ namespace ProcDigital1
                     sumaR = (sumaR / factor) + offset;
                     sumaG = (sumaG / factor) + offset;
                     sumaB = (sumaB / factor) + offset;
+
                     if (sumaR > 255)
                         sumaR = 255;
                     else if (sumaR < 0)
@@ -554,6 +555,54 @@ namespace ProcDigital1
 
         private void colorizarGradienteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            float r1 = trackR;
+            float g1 = trackG;
+            float b1 = trackB;
+
+            float r2 = 230;
+            float g2 = 100;
+            float b2 = 230;
+
+            int r = 0,g=0, b=0;
+
+            float dr = (r2 - r1) / original.Width;
+            float dg = (g2 - g1) / original.Width;
+            float db = (b2 - b1) / original.Width;
+
+            int x = 0, y = 0;
+            Color rColor;
+            Color oColor;
+            tonosDeGrisToolStripMenuItem_Click(sender, e);
+            for ( x = 0; x < original.Width; x++)
+            {
+                for ( y = 0; y < original.Height; y++)
+                {
+                    oColor = resultante.GetPixel(x, y);
+                    //calculamos el color
+
+                    r = (int)((r1 / 255.0f) * oColor.R);
+                    g = (int)((g1 / 255.0f) * oColor.G);
+                    b = (int)((b1 / 255.0f) * oColor.B);
+
+                    if (r > 255) r = 255;
+                    else if (r < 0) r = 0;
+
+                    if (g > 255) g = 255;
+                    else if (g < 0) g = 0;
+
+                    if (b > 255) b = 255;
+                    else if (b < 0) b = 0;
+
+
+                    resultante.SetPixel(x, y, Color.FromArgb(r, g, b));
+
+
+                }
+                r1 = (r1 + dr);
+                g1 = (g1 + dg);
+                b1 = (b1 + db);
+            }
+
 
 
             this.Invalidate();
@@ -689,6 +738,8 @@ namespace ProcDigital1
             conv3x3 = new int[,] { {0,-2,0 },
                                  {-2,11,-2 },
                                  {0,-2,0 } };
+
+
             factor = 2;
             offset = 96;
             Convolucion();
@@ -802,6 +853,137 @@ namespace ProcDigital1
             ConvGris(sobel0, intermedio, 0, 255);
             this.Invalidate();
 
+        }
+
+        private void laplacianoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //conv3x3 = new int[,] { {0,1,0 },
+            //                       {1,-4,1},
+            //                       {0,1,0 } };
+
+            // //tonosDeGrisToolStripMenuItem_Click(sender, e);
+            //factor = 16;
+            //offset = 32;//sirve para compensar si hay algún cambio en la iluminación
+            //Convolucion();
+            //this.Invalidate();
+            resultante = new Bitmap(original.Width, original.Height);
+            for (int x = 1; x < original.Width-1; x++)
+            {
+                for (int y = 1; y < original.Height-1; y++)
+                {
+                    Color xy11 = original.GetPixel(x - 1, y - 1);
+                    Color xy12 = original.GetPixel(x, y - 1); //color2
+                    Color xy13 = original.GetPixel(x + 1, y - 1);
+                    Color xy21 = original.GetPixel(x - 1, y);//color4
+                    Color xy22 = original.GetPixel(x, y);//color5
+                    Color xy23 = original.GetPixel(x + 1, y);//color6
+                    Color xy31 = original.GetPixel(x - 1, y + 1);
+                    Color xy32 = original.GetPixel(x, y + 1);//color8
+                    Color xy33 = original.GetPixel(x + 1, y + 1);
+
+                    int colorRed = xy12.R + xy21.R + xy22.R * (-4) + xy23.R + xy32.R;
+                    int colorGreen = xy12.G + xy21.G + xy22.G * (-4) + xy23.G + xy32.G;
+                    int colorBlue = xy12.B + xy21.B + xy22.B * (-4) + xy23.B + xy32.B;
+                    int avg = (colorRed + colorGreen + colorBlue) / 3;
+                    if (avg > 255)
+                        avg = 255;
+                    if (avg < 0) avg = 0;
+                    resultante.SetPixel(x, y, Color.FromArgb(avg, avg, avg));
+
+                }
+            }
+            this.Invalidate();
+
+         }
+
+        private void johnsonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //se saca el promedio del area para que no este sobreiluminado
+            int x = 0, y = 0;
+            resultante = new Bitmap(original.Width, original.Height);
+            int promedio = 0, a = 0, b = 0;
+            int sumaPromedio = 0, sumaMatriz = 0;
+            int tono = 0, escalar = 25;
+            //quick
+            int[,] matrizBordes =
+            {
+                { -1, 0, -1},
+                { 0, 4, 0},
+                {-1, 0, -1 }
+
+            };
+            int[,] mPromedio =
+            {
+                {1,1,1 },
+                {1,1,1 },
+                {1,1,1 }
+            };
+            int limite = 2;
+
+            for (x = 1;  x< original.Width-1; x++)
+            {
+                for ( y = 1; y < original.Height-1; y++)
+                {
+                    sumaMatriz = 0;
+                    sumaPromedio = 0;
+                    for ( a = -1; a < 2; a++)
+                    {
+                        for (b = -1; b < 2; b++)
+                        {
+                            sumaMatriz += original.GetPixel(x + a, y + b).R * matrizBordes[a + 1, b + 1] * escalar;
+                            sumaPromedio += original.GetPixel(x + a, y + b).R * mPromedio[a + 1, b + 1];
+                        }
+                    }
+                    promedio = sumaPromedio / 9;
+                    if (promedio==0)
+                    {
+                        promedio = 1;
+                    }
+                    tono = sumaMatriz / promedio;
+                    if (tono>limite)
+                    {
+                        tono = 255;
+                    }
+                    if (tono < 0)
+                        tono = 0;
+                    resultante.SetPixel(x, y, Color.FromArgb(tono, tono, tono));
+                }
+            }
+            this.Invalidate();
+        }
+
+        private void norteEsteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //conv3x3 = new int[,] {  {1,1,1 },
+            //                        {1,-2,-1},
+            //                        {1,-1,-1} };
+            //factor = 16;
+            //offset = 64;//sirve para compensar si hay algún cambio en la iluminación
+            //Convolucion();
+            //this.Invalidate();
+
+            int[,] NoroEste =
+           {
+                {1,1,1 },
+                {1,-2,-1 },
+                {1,-1,-1 }
+            };
+            resultante = new Bitmap(original.Width, original.Height);
+            for (int x = 0; x < original.Width; x++)
+            {
+                for (int y = 0; y < original.Height; y++)
+                {
+                    Color xy11 = original.GetPixel(x - 1, y - 1);
+                    Color xy12 = original.GetPixel(x, y - 1);
+                    Color xy13 = original.GetPixel(x + 1, y - 1);
+                    Color xy21 = original.GetPixel(x - 1, y);
+                    Color xy22 = original.GetPixel(x , y);
+                    Color xy23 = original.GetPixel(x + 1, y);
+                    Color xy31 = original.GetPixel(x - 1, y + 1);
+                    Color xy32 = original.GetPixel(x, y + 1);
+                    Color xy33 = original.GetPixel(x+1, y + 1);
+                }
+            }
         }
 
         private void flipHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
